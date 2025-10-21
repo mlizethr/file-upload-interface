@@ -40,7 +40,6 @@
   </div>
 
   <script>
-    // ✅ Update this line with your deployed URL:
     const UPLOAD_URL = 'https://flaskuploader.onrender.com/upload';
 
     let credentials = localStorage.getItem('credentials') || null;
@@ -83,8 +82,7 @@
       }
 
       const formData = new FormData();
-      for (let file of files) formData.append('file', file); // ✅ your Flask endpoint expects 'file'
-
+      for (let file of files) formData.append('file', file);
       const xhr = new XMLHttpRequest();
       xhr.open('POST', UPLOAD_URL, true);
       xhr.setRequestHeader('Authorization', `Basic ${credentials}`);
