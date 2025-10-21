@@ -40,7 +40,8 @@
   </div>
 
   <script>
-    const UPLOAD_URL = 'https://YOUR_SERVER_ADDRESS/upload';
+    // ✅ Update this line with your deployed URL:
+    const UPLOAD_URL = 'https://flaskuploader.onrender.com/upload';
 
     let credentials = localStorage.getItem('credentials') || null;
 
@@ -82,7 +83,7 @@
       }
 
       const formData = new FormData();
-      for (let file of files) formData.append('files', file);
+      for (let file of files) formData.append('file', file); // ✅ your Flask endpoint expects 'file'
 
       const xhr = new XMLHttpRequest();
       xhr.open('POST', UPLOAD_URL, true);
@@ -99,8 +100,8 @@
         const statusEl = document.getElementById('status');
         if (xhr.status === 200) {
           const result = JSON.parse(xhr.responseText);
-          statusEl.textContent = result.message;
-          showModal(result.files || []);
+          statusEl.textContent = result.message || 'Upload successful!';
+          showModal([result.filename || 'Archivo cargado correctamente']);
           document.getElementById('progressBar').style.width = '0%';
           fileInput.value = '';
         } else if (xhr.status === 401) {
@@ -131,3 +132,4 @@
   </script>
 </body>
 </html>
+
