@@ -98,8 +98,8 @@
         const statusEl = document.getElementById('status');
         if (xhr.status === 200) {
           const result = JSON.parse(xhr.responseText);
-          statusEl.textContent = result.message || 'Upload successful!';
-          showModal([result.filename || 'Archivo cargado correctamente']);
+          statusEl.textContent = result.success || 'Upload successful!';
+          showModal([result.success || 'Archivo cargado correctamente']);
           document.getElementById('progressBar').style.width = '0%';
           fileInput.value = '';
         } else if (xhr.status === 401) {
@@ -130,4 +130,5 @@
   </script>
 </body>
 </html>
+
 
